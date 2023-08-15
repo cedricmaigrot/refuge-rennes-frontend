@@ -1,5 +1,6 @@
 html {
   background-color: #282c34;
+  padding-top: 75px;
 }
 
 
@@ -9,6 +10,10 @@ html {
   background-color: #282c34;
 }
 
+.text-important {
+  font-weight: bold;
+  color: #FCC;
+}
 
 .not-mobile {
   display: none !important;

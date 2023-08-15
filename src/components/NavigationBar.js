@@ -7,7 +7,7 @@ function NavigationBar(props) {
     const cookies = new Cookies();
 
     return (
-        <Navbar expand="lg" bg="dark" data-bs-theme="dark">
+        <Navbar expand="lg" bg="dark" data-bs-theme="dark" fixed="top">
             <Container>
                 <Navbar.Brand href="#home">Refuge Rennes</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

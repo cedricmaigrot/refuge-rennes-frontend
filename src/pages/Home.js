@@ -1,6 +1,6 @@
 // import Calendar from "../components/Home/Calendar";
 
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import Calendar from "../components/Home/Calendar";
 import SortiesChiens from "../components/Home/SortiesChiens";
@@ -11,14 +11,25 @@ export default function Home(props) {
     return (
         <>
             <h1>Accueil</h1>
-            <div className="not-mobile" style={{ 'flexDirection': 'column' }}>
-                <h2>Calendrier des sorties</h2>
-                <div style={{ "height": "400px" }}>
-                    <Calendar type={"all"} />
-                </div>
-            </div>
 
-            <Row lg={2} sm={1} xs={1}>
+
+            <Card
+                className='mt-4 d-none d-md-block'
+                bg="dark"
+                text='light'
+            >
+                <Card.Header>
+                    <h2>Calendrier des sorties</h2>
+                </Card.Header>
+                <Card.Body>
+                    <Calendar days={props.days} type={props.type} />
+                </Card.Body>
+            </Card>
+
+            {/* <div className="not-mobile" style={{ 'flexDirection': 'column' }}>
+            </div> */}
+
+            {/* <Row lg={2} sm={1} xs={1}>
                 <Col>
                     <h2>Sorties (derniers 14j)</h2>
                     <div style={{ "height": "250px" }}>
@@ -31,22 +42,36 @@ export default function Home(props) {
                         <SortiesChiensStream offsetType="expand" />
                     </div>
                 </Col>
-            </Row>
-
-
-            <hr />
-            {/* <Row>
-                <Col md={8} sm={6} xs={12}> */}
-            <h2>Chiens les plus sortis</h2>
-            <SortiesChiens />
-            {/* </Col>
-                <Col md={4} sm={6} xs={12}> */}
-            <h2>Chiens sans balade</h2>
-            <div style={{ "height": "600px" }}>
-                <ChiensSansBalade />
-            </div>
-            {/* </Col>
             </Row> */}
+
+
+
+            <Card
+                className='mt-4'
+                bg="dark"
+                text='light'
+            >
+                <Card.Header>
+                    <h2>Chiens les plus sortis</h2>
+                </Card.Header>
+                <Card.Body>
+                    <SortiesChiens days={props.days} type={props.type} nbResults={props.nbResults} />
+                </Card.Body>
+            </Card>
+
+            <Card
+                className='mt-4'
+                bg="dark"
+                text='light'
+            >
+                <Card.Header>
+                    <h2>Chiens sans balade</h2>
+                </Card.Header>
+                <Card.Body>
+                    <ChiensSansBalade />
+                </Card.Body>
+            </Card>
+
         </>
     );
 }
