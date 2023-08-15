@@ -7,7 +7,7 @@ import SortiesChiens from "../components/Home/SortiesChiens";
 import SortiesChiensStream from "../components/Home/SortiesChiensStream";
 import ChiensSansBalade from '../components/Home/ChiensSansBalade';
 
-export default function Home() {
+export default function Home(props) {
     return (
         <>
             <h1>Accueil</h1>
