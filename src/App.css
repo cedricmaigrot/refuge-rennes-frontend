@@ -1,0 +1,39 @@
+html {
+  background-color: #282c34;
+}
+
+
+.App {
+  color: #DDD;
+  min-height: 120vh;
+  background-color: #282c34;
+}
+
+
+.not-mobile {
+  display: none !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .not-mobile {
+    display: flex !important;
+  }
+}
+
+.App h1,
+.App h2,
+.App h3 {
+  margin: 10px 0;
+}
+
+.App h1 {
+  font-size: 3rem;
+}
+
+.App h2 {
+  font-size: 2rem;
+}
+
+.App h3 {
+  font-size: 1.5rem;
+}

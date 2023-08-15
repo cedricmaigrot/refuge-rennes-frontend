@@ -1,3 +1,4 @@
 build
 node_modules
-public/chiens # photos des chiens
+# photos des chiens
+public/chiens/* 
