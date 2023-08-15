@@ -1,12 +1,12 @@
 // import Calendar from "../components/Home/Calendar";
 
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import ListePromeurs from '../components/Promeneurs/Liste';
 import PromeneursBarPlot from '../components/Promeneurs/PromeneursBarPlot';
 import PromeneursChords from '../components/Promeneurs/PromeneursChords';
 
-export default function Promeneurs() {
+export default function Promeneurs(props) {
     return (
         <>
             <h1>Les promeneurs du refuges</h1>
@@ -15,10 +15,45 @@ export default function Promeneurs() {
                 <ListePromeurs />
             </div>
             <hr /> */}
-            <h2>Nombre de balades par promeneur</h2>
-            <PromeneursBarPlot />
-            <h2>Correspondances entre les promeneurs</h2>
-            <PromeneursChords />
+
+            <Row md={2} sm={1} xs={1}>
+                <Col>
+                    <Card
+                        className='mt-4'
+                        bg="dark"
+                        text='light'
+                    >
+                        <Card.Header>
+                            <h2>Nombre de balades par promeneur</h2>
+                        </Card.Header>
+                        <Card.Body>
+                            <PromeneursBarPlot days={props.days} type={props.type} nbResults={props.nbResults} />
+                        </Card.Body>
+                    </Card>
+                </Col>
+
+                <Col>
+                    <Card
+                        className='mt-4'
+                        bg="dark"
+                        text='light'
+                    >
+                        <Card.Header>
+                            <h2>Correspondances entre les promeneurs</h2>
+                        </Card.Header>
+                        <Card.Body>
+                            <PromeneursChords days={props.days} type={props.type} nbResults={props.nbResults} />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+
+
+
+
+
+
+
         </>
     );
 }
