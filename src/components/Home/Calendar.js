@@ -60,8 +60,8 @@ export default function Calendar(props) {
                     colors={['#FFAAAA', '#F1B8AA', '#E3C6AA', '#D5D5AA', '#C6E3AA', '#B8F1AA', '#AAFFAA']}
                     margin={{ top: 20, right: 40, bottom: 40, left: 25 }}
                     yearSpacing={40}
-                    minValue="20"
-                    maxValue="75"
+                    // minValue="20"
+                    // maxValue="75"
                     monthBorderColor="#333"
                     dayBorderWidth={2}
                     dayBorderColor="#ffffff"
