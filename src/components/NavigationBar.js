@@ -19,30 +19,27 @@ function NavigationBar(props) {
     const handleShow = () => setShow(true);
 
 
-    const handleNavigation = useCallback(
-        (e) => {
-            const window = e.currentTarget;
-            if (window.scrollY < 50) {
-                setShowNavText(true)
-                console.log("scrolling 1");
-            } else {
-                setShowNavText(false)
-                console.log("scrolling 2");
-            }
-            console.log({ showNavText });
-            setY(window.scrollY);
-        },
-        [y]
-    );
+    // const handleNavigation = useCallback(
+    //     (e) => {
+    //         const window = e.currentTarget;
+    //         if (window.scrollY < 50) {
+    //             setShowNavText(true)
+    //         } else {
+    //             setShowNavText(false)
+    //         }
+    //         setY(window.scrollY);
+    //     },
+    //     [y]
+    // );
 
-    useEffect(() => {
-        setY(window.scrollY);
-        window.addEventListener("scroll", handleNavigation);
+    // useEffect(() => {
+    //     setY(window.scrollY);
+    //     window.addEventListener("scroll", handleNavigation);
 
-        return () => {
-            window.removeEventListener("scroll", handleNavigation);
-        };
-    }, [handleNavigation]);
+    //     return () => {
+    //         window.removeEventListener("scroll", handleNavigation);
+    //     };
+    // }, [handleNavigation]);
 
 
     return (
@@ -57,7 +54,7 @@ function NavigationBar(props) {
                             <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> {showNavText && "Promeneurs"}</Nav.Link>
                             <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> {showNavText && "Fiches"}</>)} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/fiche-chien">Chien</NavDropdown.Item>
-                                <NavDropdown.Item href="/fiche-chien">Promeneur</NavDropdown.Item>
+                                {/* <NavDropdown.Item href="/fiche-chien">Promeneur</NavDropdown.Item> */}
                             </NavDropdown>
                         </Nav>
                         <Nav>
