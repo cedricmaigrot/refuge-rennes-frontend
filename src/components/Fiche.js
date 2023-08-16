@@ -9,7 +9,7 @@ function Fiche(props) {
 
     let placeholder = "/chiens/placeholder_dog.jpg"
     if (props.human) {
-        placeholder = "placeholder_human.jpg"
+        placeholder = "/placeholder_human.jpg"
     }
     if (props.dog) {
         placeholder = "/chiens/placeholder_dog.jpg"
