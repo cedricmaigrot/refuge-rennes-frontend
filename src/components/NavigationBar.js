@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useCallback, useEffect } from "react";
 
 import { Form, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -6,29 +6,64 @@ import Modal from 'react-bootstrap/Modal';
 
 import Cookies from "universal-cookie";
 
-function NavigationBar(props) {
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faPersonWalking, faAddressCard, faGears } from '@fortawesome/free-solid-svg-icons'
+
+function NavigationBar(props) {
     const cookies = new Cookies();
     const [show, setShow] = useState(false);
-
+    const [showNavText, setShowNavText] = useState(true);
+    const [y, setY] = useState(window.scrollY);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+    const handleNavigation = useCallback(
+        (e) => {
+            const window = e.currentTarget;
+            if (window.scrollY < 50) {
+                setShowNavText(true)
+                console.log("scrolling 1");
+            } else {
+                setShowNavText(false)
+                console.log("scrolling 2");
+            }
+            console.log({ showNavText });
+            setY(window.scrollY);
+        },
+        [y]
+    );
+
+    useEffect(() => {
+        setY(window.scrollY);
+        window.addEventListener("scroll", handleNavigation);
+
+        return () => {
+            window.removeEventListener("scroll", handleNavigation);
+        };
+    }, [handleNavigation]);
+
 
     return (
         <>
             <Navbar expand="lg" bg="dark" data-bs-theme="dark" fixed="top">
                 <Container>
-                    <Navbar.Brand href="#home">Refuge Rennes</Navbar.Brand>
+                    <Navbar.Brand href="/">Refuge Rennes</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/">Accueil</Nav.Link>
-                            <Nav.Link href="/promeneurs">Promeneurs</Nav.Link>
-                            <NavDropdown title="Fiches" id="basic-nav-dropdown">
+                            <Nav.Link href="/"><FontAwesomeIcon icon={faHome} /> {showNavText && "Accueil"}</Nav.Link>
+                            <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> {showNavText && "Promeneurs"}</Nav.Link>
+                            <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> {showNavText && "Fiches"}</>)} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/fiche-chien">Chien</NavDropdown.Item>
                                 <NavDropdown.Item href="/fiche-chien">Promeneur</NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link onClick={handleShow} >Options</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Nav.Link onClick={handleShow} >
+                                <FontAwesomeIcon icon={faGears} /> {showNavText && "Options"}
+                            </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -39,7 +74,7 @@ function NavigationBar(props) {
                     <Modal.Title>Options</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form className='m-2'>
+                    <Form className='m-2' inline>
                         <Form.Label className='mb-2'>Interval de temps</Form.Label>
                         <Form.Select
                             aria-label="Interval de temps"
