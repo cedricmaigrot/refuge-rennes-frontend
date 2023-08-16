@@ -7,19 +7,12 @@ import { ResponsiveChord } from '@nivo/chord'
 
 export default function PromeneursChords(props) {
 
-    const [days, setDays] = useState(7);
-    const [type, setType] = useState("all");
-    const [nbResults, setNbResults] = useState(5);
-
-
-
     const [data, setData] = useState([]);
-    const [dataCat, setDataCat] = useState([]);
     const [categories, setCategories] = useState([]);
 
 
     function get_data() {
-        fetch('http://185.98.137.192:5000/balades/promeneurs-chords')
+        fetch('http://185.98.137.192:5000/balades/promeneurs-chords/' + props.days + '/' + props.type + '/' + props.nbResults + '')
             .then((response) => response.json())
             .then((d) => {
                 setData(JSON.parse(d['data']));
@@ -28,21 +21,15 @@ export default function PromeneursChords(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-        // let d = [[11, 0, 0, 2, 1, 1, 0], [0, 20, 6, 0, 4, 2, 2], [0, 9, 11, 1, 2, 2, 4], [2, 0, 1, 25, 5, 13, 1], [3, 8, 1, 5, 22, 3, 1], [1, 1, 1, 4, 1, 12, 0], [0, 4, 7, 1, 1, 0, 1]]
-        // setData(d)
     }
 
     useEffect(() => {
-        if (window.innerWidth >= 1200) {
-            setNbResults(0);
-            console.log(nbResults)
-        }
         get_data();
     }, []);
 
     useEffect(() => {
         get_data();
-    }, [days, type, nbResults]);
+    }, [props.days, props.type, props.nbResults]);
 
     return (
         <>
@@ -56,6 +43,7 @@ export default function PromeneursChords(props) {
                     data={data}
                     keys={categories}
                     margin={{ top: 60, right: 60, bottom: 90, left: 60 }}
+                    colors={{ Claude: 'green' }}
                     valueFormat=".2f"
                     padAngle={0.02}
                     innerRadiusRatio={0.96}
