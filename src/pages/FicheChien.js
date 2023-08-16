@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 import {
     useParams
 } from "react-router-dom";
@@ -7,142 +9,61 @@ import { Row, Col, Form } from "react-bootstrap";
 import Fiche from "../components/Fiche";
 import Calendar from "../components/Fiche-Chien/Calendar";
 import ProportionPie from "../components/Fiche-Chien/ProportionPie";
+import ListeDesChiens from "./ListeDesChiens";
 
-export default function Home() {
+export default function FicheChien(props) {
     let { id } = useParams();
+
+    const [walkers, setWalkers] = useState([]);
+
+    useEffect(() => {
+        fetch('http://185.98.137.192:5000/balades/fiche-chien/promeneurs/' + id.toLowerCase() + '/0/balades/0')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setWalkers(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }, []);
 
     return (
         <>
-            {id && (
-                <>
-                    <h1>Fiche chien: {id}</h1>
-                    <Row>
-                        <Col md={2}>
-                            <Fiche photo name={id} />
-                            <hr />
-                            <Form>
-                                <Form.Check
-                                    type="radio"
-                                    name="group1"
-                                    id={`chien-form`}
-                                    label={`Chien 1`}
-                                />
-                                <Form.Check
-                                    type="radio"
-                                    name="group1"
-                                    id={`chien-form`}
-                                    label={`Chien 2`}
-                                />
-                                <Form.Check
-                                    type="radio"
-                                    name="group1"
-                                    id={`chien-form`}
-                                    label={`Chien 3`}
-                                />
-                            </Form>
-                        </Col>
-                        <Col md={10}>
-                            <h3>Calendrier des sorties</h3>
-                            <div style={{ "height": "250px" }}>
-                                <Calendar type={"all"} />
-                            </div>
-                            <Row>
-                                <Col md={6}>
-                                    <h3>Promeneurs</h3>
-                                    <Row md={3}>
-                                        <Col className="mb-4">
-                                            <Fiche human photo name="Anne-Laure" />
-                                        </Col>
-                                        <Col className="mb-4">
-                                            <Fiche human photo name="Cédric" />
-                                        </Col>
-                                        <Col className="mb-4">
-                                            <Fiche human photo name="Bénévole 3" />
-                                        </Col>
-                                        <Col className="mb-4">
-                                            <Fiche human photo name="Bénévole 4" />
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col md={6}>
-                                    <h3>Mises en parc/Balades</h3>
-                                    <div style={{ "height": "400px" }}>
-                                        <ProportionPie />
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </>
-            )}
-            {!id && (
-                <>
-                    <h1>Liste des chiens du refuge: </h1>
-                    <Row md={6}>
-                        <Col className="mb-4">
-                            <Fiche photo name="Sensei" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Kingston" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Jora" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Soultan" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Sensei" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Kingston" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Jora" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Soultan" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Sensei" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Kingston" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Jora" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Soultan" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Sensei" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Kingston" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Jora" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Soultan" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Sensei" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Kingston" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Jora" />
-                        </Col>
-                        <Col className="mb-4">
-                            <Fiche photo name="Soultan" />
-                        </Col>
-                    </Row>
-                </>
-            )}
+            <h1>{id}</h1>
+            <Row sm={1} xs={1}>
+                <Col md={4}>
+                    <Fiche photo name={id} />
+                </Col>
+                <Col md={8} className=" d-none d-md-block">
+                    <h3>Calendrier des sorties</h3>
+                    <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                </Col>
+            </Row>
+            <hr />
+            <Row>
+                <Col md={4} sm={12} xs={12}>
+                    <h3>Promeneurs</h3>
+                    <Row md={2} sm={2} xs={1}>
+                        {
+                            walkers.map(walker => {
+                                return (
+                                    <Col key={walker} className="mb-4">
+                                        <Fiche human name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
+                                    </Col>
+                                )
+                            })
+                        }
 
+                    </Row>
+                </Col>
+                <Col md={5}>
+                    <h3>Mises en parc/Balades</h3>
+                    <div style={{ "height": "400px" }}>
+                        <ProportionPie name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                    </div>
+                </Col>
+            </Row>
         </>
     );
 }
