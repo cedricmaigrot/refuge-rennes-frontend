@@ -158,7 +158,7 @@ export default function SortiesChiens(props) {
 
                         return (
                             <Col key={element} className="mb-4 mt-4 d-none d-md-block" >
-                                <DogCard photo dog name={element['Chien']} />
+                                <DogCard photo dog dogLink name={element['Chien']} />
                                 {/* <Card className='mb-4'>
                                     <Card.Header>{element['Chien']} -{' '}
                                         <span data-tooltip-id={"my-tooltip"} data-tooltip-delay-show={100} data-tooltip-delay-hide={500} data-tooltip-html={"<img width='200px' onError='this.onerror=null;this.src=" + '"/chiens/placeholder_dog.jpg"' + ";' src='/chiens/" + element['Chien'].toLowerCase() + ".jpg'} alt='ok'/>"}>
