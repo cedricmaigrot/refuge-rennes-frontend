@@ -4,7 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import { Alert, Container } from "react-bootstrap";
 
 const Layout = (props) => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     return (
         <>

@@ -38,6 +38,7 @@ function App() {
             <Route index element={<Home days={days} type={type} nbResults={nbResults} />} />
             <Route path="/promeneurs" element={<Promeneurs days={days} type={type} nbResults={nbResults} />} />
             <Route path="/fiche-chien" element={<FicheChien days={days} type={type} nbResults={nbResults} />} />
+            <Route path="/fiche-chien/:id" element={<FicheChien days={days} type={type} nbResults={nbResults} />} />
           </Route>
         </Routes>
       </BrowserRouter>
