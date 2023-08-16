@@ -20,7 +20,7 @@ export default function ListeDesChiens(props) {
     return (
         <>
             <h1>Liste des chiens du refuge: </h1>
-            <Row md={6}>
+            <Row lg={6} md={3} sm={2} xs={1}>
                 {data.map(chien => {
                     return (
                         <Col key={chien} className="mb-4">
