@@ -6,61 +6,42 @@ import { ResponsivePie } from '@nivo/pie'
 import './plots.css';
 
 export default function ProportionPie(props) {
-    const [data, setData] = useState([]);
+    const [walkers, setWalkers] = useState([]);
+    const [colors, setColors] = useState([]);
+
+    function get_data() {
+        fetch('http://185.98.137.192:5000/balades/fiche-chien/promeneurs/' + props.name.toLowerCase() + '/' + props.days + '/all/0')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setWalkers(data);
+                let c = []
+                data.map(walker => {
+                    c.push(walker['color'])
+                })
+                setColors(c)
+                console.log(colors)
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
+
     useEffect(() => {
-        // fetch('http://185.98.137.192:5000/balades/calendrier-sorties-chiens/' + props.type)
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //         setData(data);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err.message);
-        //     });
-
-        setData([
-            {
-                "id": "Mise en Parc",
-                "label": "Mises en parc",
-                "value": 593,
-                "color": "hsl(101, 70%, 50%)"
-            },
-            {
-                "id": "Balades Cédric",
-                "label": "Balades Cédric",
-                "value": 380,
-                "color": "hsl(278, 70%, 50%)"
-            },
-            {
-                "id": "Balades Anne-Laure",
-                "label": "Balades Anne-Laure",
-                "value": 380,
-                "color": "hsl(150, 40%, 50%)"
-            },
-            {
-                "id": "Balades Bénévole 3",
-                "label": "Balades Bénévole 3",
-                "value": 380,
-                "color": "hsl(278, 70%, 50%)"
-            },
-            {
-                "id": "Balades Bénévole 4",
-                "label": "Balades Bénévole 4",
-                "value": 380,
-                "color": "hsl(150, 40%, 50%)"
-            }
-        ]
-        )
+        get_data()
     }, []);
-
+    useEffect(() => {
+        get_data()
+    }, [props]);
 
     return (
         <>
             <ResponsivePie
-                data={data}
+                data={walkers}
                 margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
                 innerRadius={0.5}
                 padAngle={0.7}
+                colors={colors}
                 cornerRadius={3}
                 activeOuterRadiusOffset={8}
                 borderWidth={1}
@@ -110,49 +91,7 @@ export default function ProportionPie(props) {
                 fill={[
                     {
                         match: {
-                            id: 'Mise en Parc'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'c'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'go'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'python'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'scala'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'lisp'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'elixir'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'javascript'
+                            id: 'Mise en parc'
                         },
                         id: 'lines'
                     }

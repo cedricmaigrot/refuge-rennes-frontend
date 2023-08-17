@@ -4,7 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import { Alert, Container } from "react-bootstrap";
 
 const Layout = (props) => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     return (
         <>
@@ -17,7 +17,7 @@ const Layout = (props) => {
                 setNbResults={props.setNbResults}
                 setShow={setShow}
             />
-            <Container>
+            <Container id="top">
                 <Alert show={show} variant="info" className="mt-4 mb-4" onClose={() => setShow(false)} dismissible>
                     <Alert.Heading>Options choisies :  </Alert.Heading>
                     <p>

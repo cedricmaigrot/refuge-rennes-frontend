@@ -9,6 +9,7 @@ import Promeneurs from "./pages/Promeneurs";
 import Cookies from "universal-cookie";
 
 import './App.css';
+import ListeDesChiens from './pages/ListeDesChiens';
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
           }>
             <Route index element={<Home days={days} type={type} nbResults={nbResults} />} />
             <Route path="/promeneurs" element={<Promeneurs days={days} type={type} nbResults={nbResults} />} />
-            <Route path="/fiche-chien" element={<FicheChien days={days} type={type} nbResults={nbResults} />} />
+            <Route path="/fiche-chien" element={<ListeDesChiens />} />
+            <Route path="/fiche-chien/:id" element={<FicheChien days={days} type={type} nbResults={nbResults} />} />
           </Route>
         </Routes>
       </BrowserRouter>
