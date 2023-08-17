@@ -8,8 +8,6 @@ import { useForm } from "react-hook-form";
 import DogCard from '../Fiche';
 import 'react-tooltip/dist/react-tooltip.css'
 
-// import './plots.css';
-import './plots.css';
 
 // import data from './SortiesChiensData'
 

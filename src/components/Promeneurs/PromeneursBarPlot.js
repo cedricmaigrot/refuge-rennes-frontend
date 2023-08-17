@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
 
-import './plots.css';
 import PromeneursBarIndiv from './PromeneursBarIndiv';
 import PromeneursBarCategories from './PromeneursBarCategories';
 

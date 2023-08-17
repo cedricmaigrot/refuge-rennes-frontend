@@ -5,7 +5,6 @@ import { ResponsiveBar } from "@nivo/bar";
 
 import { useForm } from "react-hook-form";
 
-import './plots.css';
 import DogCard from '../Fiche';
 // import data from './SortiesChiensData'
 
