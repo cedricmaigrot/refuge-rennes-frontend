@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 import {
+    Link,
     useParams
 } from "react-router-dom";
 
 
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, Card } from "react-bootstrap";
 import Fiche from "../components/Fiche";
 import Calendar from "../components/Fiche-Chien/Calendar";
 import ProportionPie from "../components/Fiche-Chien/ProportionPie";
-import ListeDesChiens from "./ListeDesChiens";
 
 export default function FicheChien(props) {
     let { id } = useParams();
@@ -31,6 +31,9 @@ export default function FicheChien(props) {
     return (
         <>
             <h1>{id}</h1>
+            <p>
+                <Link to={"/fiche-chien#" + id}>Retour à la liste des chiens</Link>
+            </p>
             <Row sm={1} xs={1}>
                 <Col md={4}>
                     <Fiche photo name={id} />
@@ -58,10 +61,21 @@ export default function FicheChien(props) {
                     </Row>
                 </Col>
                 <Col md={5}>
-                    <h3>Mises en parc/Balades</h3>
-                    <div style={{ "height": "400px" }}>
-                        <ProportionPie name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
-                    </div>
+
+                    <Card
+                        className='mt-4'
+                    // bg="dark"
+                    // text='light'
+                    >
+                        <Card.Header>
+                            <h3>Mises en parc/Balades</h3>
+                        </Card.Header>
+                        <Card.Body>
+                            <div style={{ "height": "400px" }}>
+                                <ProportionPie name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                            </div>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
         </>

@@ -23,8 +23,9 @@ function Fiche(props) {
 
     return (
         <Card className="fiche"
-            bg="dark"
-            text='light'>
+        // bg="danger"
+        // text='light'
+        >
             {props.photo &&
                 <Card.Img variant="top" src={"/chiens/" + process_name(props.name) + ".jpg"} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
@@ -32,21 +33,29 @@ function Fiche(props) {
                 }} />
             }
             <Card.Body>
-                <Card.Title>{props.human && <FontAwesomeIcon style={{ color: props.color }} icon={faPersonWalking} />} {props.name}</Card.Title>
+                <Card.Title>
+                    {props.human && <FontAwesomeIcon style={{ color: props.color }} icon={faPersonWalking} />}{' '}
+                    {props.name}
+                </Card.Title>
                 {/* <Card.Text>
                     Some quick example text to build on the card title and make up the
                     bulk of the card's content.
                 </Card.Text> */}
-                {props.dogLink &&
-                    <Link variant="primary" to={'/fiche-chien/' + props.name + '#top'} style={{ textDecoration: "None" }}>
-                        <Badge>
-                            Voir {props.name} <FontAwesomeIcon icon={faEye} />
-                        </Badge>
-                    </Link>
-                }
+
             </Card.Body>
-            {props.notes &&
+            {(props.notes || props.dogLink) &&
                 <Card.Footer>
+                    {props.dogLink &&
+                        <>
+                            <small>
+                                <Link variant="primary" to={'/fiche-chien/' + props.name + '#top'} style={{ textDecoration: "None" }}>
+                                    {/* <Badge> */}
+                                    (Voir {props.name} <FontAwesomeIcon icon={faEye} />)
+                                    {/* </Badge> */}
+                                </Link>
+                            </small>
+                        </>
+                    }
                     {props.notes}
                 </Card.Footer>
             }

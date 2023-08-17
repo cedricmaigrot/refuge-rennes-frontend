@@ -10,18 +10,13 @@ export default function Promeneurs(props) {
     return (
         <>
             <h1>Les promeneurs du refuges</h1>
-            {/* <div className="not-mobile">
-                <h2>Liste des promeneurs</h2>
-                <ListePromeurs />
-            </div>
-            <hr /> */}
 
             <Row md={2} sm={1} xs={1}>
                 <Col>
                     <Card
                         className='mt-4'
-                        bg="dark"
-                        text='light'
+                    // bg="dark"
+                    // text='light'
                     >
                         <Card.Header>
                             <h2>Nombre de balades par promeneur</h2>
@@ -35,8 +30,8 @@ export default function Promeneurs(props) {
                 <Col>
                     <Card
                         className='mt-4'
-                        bg="dark"
-                        text='light'
+                    // bg="dark"
+                    // text='light'
                     >
                         <Card.Header>
                             <h2>Correspondances entre les promeneurs</h2>
