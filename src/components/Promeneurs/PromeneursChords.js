@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
 
-import './plots.css';
 import { ResponsiveChord } from '@nivo/chord'
 
 
@@ -9,14 +8,18 @@ export default function PromeneursChords(props) {
 
     const [data, setData] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [colors, setColors] = useState([]);
 
 
     function get_data() {
-        fetch('http://185.98.137.192:5000/balades/promeneurs-chords/' + props.days + '/' + props.type + '/' + props.nbResults + '')
+        let url = 'http://185.98.137.192:5000/balades/promeneurs-chords/' + props.days + '/' + props.type + '/' + props.nbResults + ''
+        console.log(url)
+        fetch(url)
             .then((response) => response.json())
             .then((d) => {
                 setData(JSON.parse(d['data']));
                 setCategories(d['labels']);
+                setColors(d['colors']);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -36,14 +39,10 @@ export default function PromeneursChords(props) {
 
             <div style={{ "height": "600px" }}>
                 <ResponsiveChord
-                    // data={[[11, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 13, 6, 0, 4, 2, 1, 2, 3, 3, 0, 0, 6, 3, 4], [0, 9, 8, 1, 2, 2, 2, 4, 1, 0, 0, 0, 0, 2, 0], [2, 0, 1, 22, 5, 13, 0, 1, 4, 0, 7, 5, 0, 1, 0], [3, 8, 1, 5, 15, 3, 1, 1, 4, 2, 2, 3, 2, 3, 4], [1, 1, 1, 4, 1, 8, 2, 0, 0, 0, 1, 4, 0, 1, 0], [0, 2, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0], [0, 4, 7, 1, 1, 0, 0, 1, 0, 3, 1, 0, 0, 0, 0], [0, 2, 1, 2, 3, 0, 0, 0, 1, 1, 0, 0, 1, 0, 2], [0, 2, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 3], [0, 0, 0, 1, 2, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0], [1, 0, 0, 3, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 2, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0, 2, 0, 1], [0, 3, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 1, 0], [0, 4, 0, 0, 2, 0, 0, 0, 3, 2, 0, 0, 1, 0, 1]]}
-                    // keys={['Flo', 'Renée', 'Denise', 'Cédric', 'Claude', 'Laura', 'Alice',
-                    //     'Isa', 'Pauline', 'Margaux', 'Charline', 'Anne-Laure', 'Olivier',
-                    //     'Agnès', 'Christian']}
                     data={data}
                     keys={categories}
                     margin={{ top: 60, right: 60, bottom: 90, left: 60 }}
-                    colors={{ Claude: 'green' }}
+                    colors={colors}
                     valueFormat=".2f"
                     padAngle={0.02}
                     innerRadiusRatio={0.96}
@@ -79,7 +78,7 @@ export default function PromeneursChords(props) {
                             ]
                         ]
                     }}
-                    colors={{ scheme: 'category10' }}
+                    // colors={{ scheme: 'category10' }}
                     motionConfig="stiff"
                     legends={[
                         {

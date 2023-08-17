@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { ResponsiveStream } from '@nivo/stream'
-import './plots.css';
 
 export default function SortiesChiensStream(props) {
 

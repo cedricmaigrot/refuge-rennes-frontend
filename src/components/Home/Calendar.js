@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 // install (please try to align the version of installed @nivo packages)
 // yarn add @nivo/calendar
 import { ResponsiveCalendar } from '@nivo/calendar'
-import './plots.css';
 
 export default function Calendar(props) {
     const [data, setData] = useState([]);

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 // install (please try to align the version of installed @nivo packages)
 // yarn add @nivo/calendar
 import { ResponsivePie } from '@nivo/pie'
-import './plots.css';
 
 export default function ProportionPie(props) {
     const [walkers, setWalkers] = useState([]);

@@ -8,8 +8,6 @@ import { useForm } from "react-hook-form";
 import DogCard from '../Fiche';
 import 'react-tooltip/dist/react-tooltip.css'
 
-// import './plots.css';
-import './plots.css';
 
 // import data from './SortiesChiensData'
 
@@ -17,6 +15,7 @@ export default function SortiesChiens(props) {
 
     const [data, setData] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [colors, setColors] = useState([]);
 
 
     function get_data() {
@@ -35,7 +34,16 @@ export default function SortiesChiens(props) {
         fetch('http://185.98.137.192:5000/balades/categories')
             .then((response) => response.json())
             .then((data) => {
-                setCategories(data);
+
+                let cat = []
+                let col = []
+                data.map(e => {
+                    cat.push(e['Categorie'])
+                    col.push(e['color'])
+                })
+
+                setCategories(cat);
+                setColors(col);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -58,30 +66,39 @@ export default function SortiesChiens(props) {
                     padding={0.3}
                     valueScale={{ type: 'linear' }}
                     indexScale={{ type: 'band', round: true }}
-                    colors={['#777', '#333', '#F28E2B', '#A0CBE8', '#8CD17D', '#F1CE63', '#FF9D9A', '#D7B5A6']}
+                    colors={colors}
                     defs={[
                         {
-                            id: 'lines',
+                            id: 'grayLines',
                             type: 'patternLines',
                             background: 'inherit',
-                            color: '#AAA',
-                            rotation: 10,
-                            lineWidth: 1,
-                            spacing: 8
+                            color: 'rgba(128, 128, 128, 0.3)',
+                            rotation: -30,
+                            lineWidth: 3,
+                            spacing: 10
+                        },
+                        {
+                            id: 'blackLines',
+                            type: 'patternLines',
+                            background: 'inherit',
+                            color: 'rgba(30, 30, 30, 0.3)',
+                            rotation: 30,
+                            lineWidth: 3,
+                            spacing: 10
                         }
                     ]}
                     fill={[
                         {
                             match: {
-                                id: 'Mise en parc'
+                                id: "Autre"
                             },
-                            id: 'lines'
+                            id: 'blackLines'
                         },
                         {
                             match: {
-                                id: 'Autre'
+                                id: "Mise en parc"
                             },
-                            id: 'lines'
+                            id: 'grayLines'
                         }
                     ]}
                     borderColor={{

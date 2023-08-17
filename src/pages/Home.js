@@ -15,8 +15,8 @@ export default function Home(props) {
 
             <Card
                 className='mt-4 d-none d-md-block'
-                bg="dark"
-                text='light'
+            // bg="dark"
+            // text='light'
             >
                 <Card.Header>
                     <h2>Calendrier des sorties</h2>
@@ -48,8 +48,8 @@ export default function Home(props) {
 
             <Card
                 className='mt-4'
-                bg="dark"
-                text='light'
+            // bg="dark"
+            // text='light'
             >
                 <Card.Header>
                     <h2>Chiens les plus sortis</h2>
@@ -61,8 +61,8 @@ export default function Home(props) {
 
             <Card
                 className='mt-4'
-                bg="dark"
-                text='light'
+            // bg="dark"
+            // text='light'
             >
                 <Card.Header>
                     <h2>Chiens sans balade</h2>
