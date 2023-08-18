@@ -38,7 +38,7 @@ export default function ListeDesChiens(props) {
                 {data.map(chien => {
                     return (
                         <Col key={chien} className="mb-4" id={chien}>
-                            <Fiche photo={showPhoto} dogLink name={chien} />
+                            <Fiche photo={showPhoto} dog link name={chien} />
                         </Col>
                     )
                 })}

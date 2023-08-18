@@ -5,8 +5,11 @@ import {
     useParams
 } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-import { Row, Col, Form, Card } from "react-bootstrap";
+
+import { Row, Col, Form, Card, Button } from "react-bootstrap";
 import Fiche from "../components/Fiche";
 import Calendar from "../components/Fiche-Chien/Calendar";
 import ProportionPie from "../components/Fiche-Chien/ProportionPie";
@@ -31,9 +34,14 @@ export default function FicheChien(props) {
     return (
         <>
             <h1>{id}</h1>
-            <p>
-                <Link to={"/fiche-chien#" + id}>Retour à la liste des chiens</Link>
-            </p>
+
+            <Link to={"/fiche-chien#" + id}>
+
+                <Button variant="secondary" className='mt-4 mb-4'>
+                    <FontAwesomeIcon icon={faArrowLeft} /> Retour à la liste des chiens
+                </Button>
+            </Link>
+
             <Row sm={1} xs={1}>
                 <Col md={4}>
                     <Fiche photo name={id} />
@@ -45,14 +53,14 @@ export default function FicheChien(props) {
             </Row>
             <hr />
             <Row>
-                <Col md={4} sm={12} xs={12}>
+                <Col md={8} sm={12} xs={12}>
                     <h3>Promeneurs</h3>
-                    <Row md={2} sm={2} xs={1}>
+                    <Row md={4} sm={2} xs={1}>
                         {
                             walkers.map(walker => {
                                 return (
                                     <Col key={walker} className="mb-4">
-                                        <Fiche human name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
+                                        <Fiche human link name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
                                     </Col>
                                 )
                             })
@@ -60,16 +68,13 @@ export default function FicheChien(props) {
 
                     </Row>
                 </Col>
-                <Col md={5}>
+                <Col md={4}>
+                    <h3>Mises en parc/Balades</h3>
 
                     <Card
-                        className='mt-4'
                     // bg="dark"
                     // text='light'
                     >
-                        <Card.Header>
-                            <h3>Mises en parc/Balades</h3>
-                        </Card.Header>
                         <Card.Body>
                             <div style={{ "height": "400px" }}>
                                 <ProportionPie name={id} days={props.days} type={props.type} nbResults={props.nbResults} />

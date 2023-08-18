@@ -1,13 +1,36 @@
-import Button from 'react-bootstrap/Button';
+import React, { useState, useEffect } from 'react';
+
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faPersonWalking, faAddressCard, faGears } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faLink, faPlus, faPersonWalking, faDog } from '@fortawesome/free-solid-svg-icons'
 import { Badge } from 'react-bootstrap';
 
 
 function Fiche(props) {
+
+    const [color, setColor] = useState("gray");
+    const [category, setCategory] = useState("Autre");
+
+    useEffect(() => {
+
+        if (props.human)
+            fetch('http://185.98.137.192:5000/balades/promeneur/information/' + props.name)
+                .then((response) => response.json())
+                .then((data) => {
+                    setColor(data['color'][0]);
+                    setCategory(data['category'][0]);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+
+        if (props.color) {
+            setColor(props.color)
+        }
+    }, []);
+
 
     function process_name(name) {
         return name.toLowerCase();
@@ -21,8 +44,14 @@ function Fiche(props) {
         placeholder = "/chiens/placeholder_dog.jpg"
     }
 
+    let page = '/fiche-chien/' + props.name
+    if (props.human) {
+        page = '/fiche-promeneur/' + props.name
+    }
+
     return (
         <Card className="fiche"
+            style={{ border: "4px solid " + color }}
         // bg="danger"
         // text='light'
         >
@@ -32,34 +61,37 @@ function Fiche(props) {
                     currentTarget.src = placeholder;
                 }} />
             }
+            <Card.Header>
+
+                {props.human && <FontAwesomeIcon style={{ color: color }} icon={faPersonWalking} />}
+                {props.dog && <FontAwesomeIcon style={{ color: color }} icon={faDog} />}{' '}
+                {props.name}
+            </Card.Header>
             <Card.Body>
-                <Card.Title>
-                    {props.human && <FontAwesomeIcon style={{ color: props.color }} icon={faPersonWalking} />}{' '}
-                    {props.name}
-                </Card.Title>
-                {/* <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </Card.Text> */}
+                {props.notes}
+                {
+                    props.link && props.notes && <br />
+                }
+                {props.human && category === "Salarié" && (<><Badge bg="light" style={{ color: "orange" }}>Salarié</Badge></>)}
+                {props.human && category !== "Salarié" && (<><Badge bg="light" style={{ color: "teal" }}>Bénévole</Badge></>)}
 
             </Card.Body>
-            {(props.notes || props.dogLink) &&
+            {(props.notes || props.link) &&
                 <Card.Footer>
-                    {props.dogLink &&
+                    {props.link &&
                         <>
                             <small>
-                                <Link variant="primary" to={'/fiche-chien/' + props.name + '#top'} style={{ textDecoration: "None" }}>
+                                <Link variant="primary" to={page} style={{ textDecoration: "None" }}>
                                     {/* <Badge> */}
-                                    (Voir {props.name} <FontAwesomeIcon icon={faEye} />)
+                                    <Badge bg="secondary">Voir <FontAwesomeIcon icon={faPlus} /> <FontAwesomeIcon icon={faLink} /></Badge>
                                     {/* </Badge> */}
                                 </Link>
                             </small>
                         </>
                     }
-                    {props.notes}
                 </Card.Footer>
             }
-        </Card>
+        </Card >
     );
 }
 
