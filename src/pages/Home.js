@@ -1,3 +1,5 @@
+
+
 // import Calendar from "../components/Home/Calendar";
 
 import { Card, Col, Row } from 'react-bootstrap';
@@ -7,7 +9,11 @@ import SortiesChiens from "../components/Home/SortiesChiens";
 import SortiesChiensStream from "../components/Home/SortiesChiensStream";
 import ChiensSansBalade from '../components/Home/ChiensSansBalade';
 
+
+
 export default function Home(props) {
+
+
     return (
         <>
             <h1>Accueil</h1>
@@ -22,7 +28,8 @@ export default function Home(props) {
                     <h2>Calendrier des sorties</h2>
                 </Card.Header>
                 <Card.Body>
-                    <Calendar days={props.days} type={props.type} />
+
+                    <Calendar days={props.days} />
                 </Card.Body>
             </Card>
 

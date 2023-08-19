@@ -5,26 +5,26 @@ import {
     useParams
 } from "react-router-dom";
 
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-
 import { Row, Col, Form, Card, Button } from "react-bootstrap";
 import Fiche from "../components/Fiche";
-import Calendar from "../components/Fiche-Chien/Calendar";
-import ProportionPie from "../components/Fiche-Chien/ProportionPie";
+import Calendar from "../components/Fiche-Promeneur/Calendar";
+import ProportionPie from "../components/Fiche-Promeneur/ProportionPie";
 
-export default function FicheChien(props) {
+export default function FichePromeneur(props) {
     let { id } = useParams();
 
-    const [walkers, setWalkers] = useState([]);
+    const [dogs, setDogs] = useState([]);
 
     useEffect(() => {
-        fetch('http://185.98.137.192:5000/balades/fiche-chien/promeneurs/' + id.toLowerCase() + '/0/balades/0')
+        fetch('http://185.98.137.192:5000/balades/fiche-promeneur/chiens/' + id.toLowerCase() + '/0/balades/0')
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                setWalkers(data);
+                setDogs(data);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -34,17 +34,15 @@ export default function FicheChien(props) {
     return (
         <>
             <h1>{id}</h1>
-
-            <Link to={"/fiche-chien#" + id}>
-
+            <Link to={"/fiche-promeneur#" + id}>
                 <Button variant="secondary" className='mt-4 mb-4'>
-                    <FontAwesomeIcon icon={faArrowLeft} /> Retour à la liste des chiens
+                    <FontAwesomeIcon icon={faArrowLeft} /> Retour à la liste des promeneurs
                 </Button>
             </Link>
 
             <Row sm={1} xs={1}>
                 <Col md={4}>
-                    <Fiche photo name={id} />
+                    <Fiche photo human name={id} />
                 </Col>
                 <Col md={8} className=" d-none d-md-block">
                     <h3>Calendrier des sorties</h3>
@@ -54,13 +52,14 @@ export default function FicheChien(props) {
             <hr />
             <Row>
                 <Col md={8} sm={12} xs={12}>
-                    <h3>Promeneurs</h3>
+                    <h3>Chiens sortis</h3>
                     <Row md={4} sm={2} xs={1}>
                         {
-                            walkers.map(walker => {
+                            dogs.map(e => {
                                 return (
-                                    <Col key={walker} className="mb-4">
-                                        <Fiche human link name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
+                                    <Col key={e} className="mb-4">
+                                        {/* <Fiche dog link name={e['id']} color={e['color']} notes={e['value'] + " balades"} /> */}
+                                        <Fiche dog link name={e['id']} color={e['color']} />
                                     </Col>
                                 )
                             })
@@ -70,7 +69,6 @@ export default function FicheChien(props) {
                 </Col>
                 <Col md={4}>
                     <h3>Mises en parc/Balades</h3>
-
                     <Card
                     // bg="dark"
                     // text='light'

@@ -55,7 +55,7 @@ function NavigationBar(props) {
                             <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> {showNavText && "Promeneurs"}</Nav.Link>
                             <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> {showNavText && "Fiches"}</>)} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/fiche-chien">Chien</NavDropdown.Item>
-                                {/* <NavDropdown.Item href="/fiche-chien">Promeneur</NavDropdown.Item> */}
+                                <NavDropdown.Item href="/fiche-promeneur">Promeneur</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav>
