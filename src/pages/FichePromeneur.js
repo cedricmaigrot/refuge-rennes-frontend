@@ -58,7 +58,8 @@ export default function FichePromeneur(props) {
                             dogs.map(e => {
                                 return (
                                     <Col key={e} className="mb-4">
-                                        <Fiche dog link name={e['id']} color={e['color']} notes={e['value'] + " balades"} />
+                                        {/* <Fiche dog link name={e['id']} color={e['color']} notes={e['value'] + " balades"} /> */}
+                                        <Fiche dog link name={e['id']} color={e['color']} />
                                     </Col>
                                 )
                             })

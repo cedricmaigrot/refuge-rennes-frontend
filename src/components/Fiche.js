@@ -10,87 +10,89 @@ import { Badge } from 'react-bootstrap';
 
 function Fiche(props) {
 
+    const [icon, setIcon] = useState(faDog);
+    const [imgPlaceholder, setImgPlaceholder] = useState("/chiens/placeholder_dog.jpg");
+    const [url, setUrl] = useState('/fiche-chien/' + props.name);
     const [color, setColor] = useState("gray");
     const [category, setCategory] = useState("Autre");
-
-    useEffect(() => {
-
-        if (props.human)
-            fetch('http://185.98.137.192:5000/balades/promeneur/information/' + props.name)
-                .then((response) => response.json())
-                .then((data) => {
-                    setColor(data['color'][0]);
-                    setCategory(data['category'][0]);
-                })
-                .catch((err) => {
-                    console.log(err.message);
-                });
-
-        if (props.color) {
-            setColor(props.color)
-        }
-    }, []);
-
 
     function process_name(name) {
         return name.toLowerCase();
     }
 
-    let placeholder = "/chiens/placeholder_dog.jpg"
-    if (props.human) {
-        placeholder = "/placeholder_human.jpg"
-    }
-    if (props.dog) {
-        placeholder = "/chiens/placeholder_dog.jpg"
-    }
+    useEffect(() => {
+        if (props.human) {
+            fetch('http://185.98.137.192:5000/balades/promeneur/information/' + props.name)
+                .then((response) => response.json())
+                .then((data) => {
+                    setColor(data['color'][0]);
+                    console.log(data['category'][0])
+                    if (data['category'][0] === "Salarié") {
+                        setCategory('Salarié')
+                        setColor('orange')
+                    } else {
+                        setCategory('Bénévole')
+                        setColor('teal')
+                    }
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+            setIcon(faPersonWalking)
+            setImgPlaceholder("/placeholder_human.jpg")
+            setUrl('/fiche-promeneur/' + props.name)
+        }
+        if (props.dog) {
+            fetch('http://185.98.137.192:5000/balades/chien/' + props.name.toLowerCase())
+                .then((response) => response.json())
+                .then((data) => {
+                    setColor(data[0]['levelColor']);
+                    setCategory(data[0]['level']);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+            setIcon(faDog)
+            setImgPlaceholder("/chiens/placeholder_dog.jpg")
+            setUrl('/fiche-chien/' + props.name)
+        }
 
-    let page = '/fiche-chien/' + props.name
-    if (props.human) {
-        page = '/fiche-promeneur/' + props.name
-    }
+        console.log(color)
+    }, []);
+
+
+
+
 
     return (
         <Card className="fiche"
-            style={{ border: "4px solid " + color }}
-        // bg="danger"
-        // text='light'
+            style={{ border: "3px solid " + color }}
         >
             {props.photo &&
                 <Card.Img variant="top" src={"/chiens/" + process_name(props.name) + ".jpg"} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = placeholder;
+                    currentTarget.src = imgPlaceholder;
                 }} />
             }
-            <Card.Header>
+            <Card.Body>
 
                 {props.human && <FontAwesomeIcon style={{ color: color }} icon={faPersonWalking} />}
                 {props.dog && <FontAwesomeIcon style={{ color: color }} icon={faDog} />}{' '}
                 {props.name}
-            </Card.Header>
-            <Card.Body>
+                {' '}
+
                 {props.notes}
                 {
                     props.link && props.notes && <br />
                 }
-                {props.human && category === "Salarié" && (<><Badge bg="light" style={{ color: "orange" }}>Salarié</Badge></>)}
-                {props.human && category !== "Salarié" && (<><Badge bg="light" style={{ color: "teal" }}>Bénévole</Badge></>)}
 
             </Card.Body>
-            {(props.notes || props.link) &&
-                <Card.Footer>
-                    {props.link &&
-                        <>
-                            <small>
-                                <Link variant="primary" to={page} style={{ textDecoration: "None" }}>
-                                    {/* <Badge> */}
-                                    <Badge bg="secondary">Voir <FontAwesomeIcon icon={faPlus} /> <FontAwesomeIcon icon={faLink} /></Badge>
-                                    {/* </Badge> */}
-                                </Link>
-                            </small>
-                        </>
-                    }
-                </Card.Footer>
-            }
+            <Card.Footer>
+                <Link to={url} style={{ textDecoration: "None" }}>
+                    <Badge bg="light" text="dark"><FontAwesomeIcon icon={faLink} /></Badge>
+                </Link>{' '}
+                <Badge bg="light" style={{ color: color }}>{category}</Badge>
+            </Card.Footer>
         </Card >
     );
 }
