@@ -174,7 +174,7 @@ export default function SortiesChiens(props) {
                     data.map((element, index) => {
 
                         return (
-                            <Col key={element} className="mb-4 mt-4 d-none d-md-block" >
+                            <Col className="mb-4 mt-4 d-none d-md-block" >
                                 <DogCard photo dog dogLink name={element['Chien']} />
                                 {/* <Card className='mb-4'>
                                     <Card.Header>{element['Chien']} -{' '}

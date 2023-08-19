@@ -47,29 +47,32 @@ function Fiche(props) {
             fetch('http://185.98.137.192:5000/balades/chien/' + props.name.toLowerCase())
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(props.name)
+                    console.log(data)
                     setColor(data[0]['levelColor']);
+
                     if (data[0]['level'] === 'vert') {
                         setCategory((<>
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircleHalfStroke} />
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircleRegular} />
+                            <FontAwesomeIcon icon={faCircleHalfStroke} />
+                            <FontAwesomeIcon icon={faCircleRegular} />
                         </>))
                     }
                     if (data[0]['level'] === 'bleu') {
                         setCategory((<>
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircle} />
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircleRegular} />
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircleRegular} />
                         </>))
                     }
                     if (data[0]['level'] === 'rouge') {
                         setCategory((<>
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircle} />
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircleHalfStroke} />
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircleHalfStroke} />
                         </>))
                     }
                     if (data[0]['level'] === 'noir') {
                         setCategory((<>
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircle} />
-                            <FontAwesomeIcon style={{ color: color }} icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircle} />
                         </>))
                     }
                 })
@@ -83,8 +86,6 @@ function Fiche(props) {
 
         console.log(color)
     }, []);
-
-
 
 
 
