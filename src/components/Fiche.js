@@ -4,7 +4,8 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faLink, faPlus, faPersonWalking, faDog } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCircleHalfStroke, faPersonWalking, faDog } from '@fortawesome/free-solid-svg-icons'
+import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons/faCircle'
 import { Badge } from 'react-bootstrap';
 
 
@@ -46,8 +47,34 @@ function Fiche(props) {
             fetch('http://185.98.137.192:5000/balades/chien/' + props.name.toLowerCase())
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(props.name)
+                    console.log(data)
                     setColor(data[0]['levelColor']);
-                    setCategory(data[0]['level']);
+
+                    if (data[0]['level'] === 'vert') {
+                        setCategory((<>
+                            <FontAwesomeIcon icon={faCircleHalfStroke} />
+                            <FontAwesomeIcon icon={faCircleRegular} />
+                        </>))
+                    }
+                    if (data[0]['level'] === 'bleu') {
+                        setCategory((<>
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircleRegular} />
+                        </>))
+                    }
+                    if (data[0]['level'] === 'rouge') {
+                        setCategory((<>
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircleHalfStroke} />
+                        </>))
+                    }
+                    if (data[0]['level'] === 'noir') {
+                        setCategory((<>
+                            <FontAwesomeIcon icon={faCircle} />
+                            <FontAwesomeIcon icon={faCircle} />
+                        </>))
+                    }
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -59,8 +86,6 @@ function Fiche(props) {
 
         console.log(color)
     }, []);
-
-
 
 
 
@@ -89,7 +114,7 @@ function Fiche(props) {
             </Card.Body>
             <Card.Footer>
                 <Link to={url} style={{ textDecoration: "None" }}>
-                    <Badge bg="light" text="dark"><FontAwesomeIcon icon={faLink} /></Badge>
+                    <Badge bg="dark">Voir plus</Badge>
                 </Link>{' '}
                 <Badge bg="light" style={{ color: color }}>{category}</Badge>
             </Card.Footer>
