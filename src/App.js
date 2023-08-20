@@ -12,6 +12,7 @@ import './App.css';
 import ListeDesChiens from './pages/ListeDesChiens';
 import ListeDesPromeneurs from './pages/ListeDesPromeneurs';
 import FichePromeneur from './pages/FichePromeneur';
+import Verif from './pages/Verif';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             />
           }>
             <Route index element={<Home days={days} type={type} nbResults={nbResults} />} />
+            <Route path="/verif" element={<Verif days={days} type={type} nbResults={nbResults} />} />
             <Route path="/promeneurs" element={<Promeneurs days={days} type={type} nbResults={nbResults} />} />
             <Route path="/fiche-chien" element={<ListeDesChiens />} />
             <Route path="/fiche-chien/:id" element={<FicheChien days={days} type={type} nbResults={nbResults} />} />
