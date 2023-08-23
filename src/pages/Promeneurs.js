@@ -22,7 +22,7 @@ export default function Promeneurs(props) {
                             <h2>Nombre de balades par promeneur</h2>
                         </Card.Header>
                         <Card.Body>
-                            <PromeneursBarPlot days={props.days} type={props.type} nbResults={props.nbResults} />
+                            <PromeneursBarPlot days={props.days} type={"balades"} nbResults={props.nbResults} />
                         </Card.Body>
                     </Card>
                 </Col>
@@ -37,7 +37,7 @@ export default function Promeneurs(props) {
                             <h2>Correspondances entre les promeneurs</h2>
                         </Card.Header>
                         <Card.Body>
-                            <PromeneursChords days={props.days} type={props.type} nbResults={props.nbResults} />
+                            <PromeneursChords days={props.days} type={"balades"} nbResults={props.nbResults} />
                         </Card.Body>
                     </Card>
                 </Col>
