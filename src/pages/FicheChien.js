@@ -48,14 +48,16 @@ export default function FicheChien(props) {
                 </Col>
                 <Col md={8} className=" d-none d-md-block">
                     <h3>Calendrier des sorties</h3>
-                    <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                    <div style={{ 'marginLeft': "50px" }}>
+                        <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                    </div>
                 </Col>
             </Row>
             <hr />
             <Row>
-                <Col md={8} sm={12} xs={12}>
+                <Col md={6} sm={12} xs={12}>
                     <h3>Promeneurs</h3>
-                    <Row md={4} sm={2} xs={1}>
+                    <Row md={3} sm={2} xs={1}>
                         {
                             walkers.map(walker => {
                                 return (
@@ -68,7 +70,7 @@ export default function FicheChien(props) {
 
                     </Row>
                 </Col>
-                <Col md={4}>
+                <Col md={6}>
                     <h3>Mises en parc/Balades</h3>
 
                     <Card

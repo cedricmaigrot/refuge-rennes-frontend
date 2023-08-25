@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
-import { Row, Col } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare } from '@fortawesome/free-solid-svg-icons'
+import { Row, Col } from "react-bootstrap";
 
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/calendar
-import { ResponsiveCalendar } from '@nivo/calendar'
+import ActivityCalendar from 'react-activity-calendar'
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 export default function Calendar(props) {
     const [data, setData] = useState([]);
     const [labelDays, setLabelDays] = useState("");
     const [labelType, setLabelType] = useState("");
 
+    const explicitTheme = {
+        light: ['#f0f0f0', '#c4edde', '#7ac7c4', '#f73859', '#384259'],
+        dark: ['#383838', '#E96479', '#7DB9B6', '#F5E9CF', '#4D455D'],
+    };
+
 
     function preprocess() {
-        fetch('http://185.98.137.192:5000/balades/fiche-chien/calendar/' + props.name + '/' + props.days + '/' + props.type)
+        const url = 'http://185.98.137.192:5000/balades/fiche-chien/calendar/' + props.name + '/' + props.days + '/' + props.type
+        console.log(url)
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -25,6 +32,23 @@ export default function Calendar(props) {
             .catch((err) => {
                 console.log(err.message);
             });
+
+        if (props.type == "all") {
+            setLabelType("Mises en parc + balades")
+        }
+        else if (props.type == "parcs") {
+            setLabelType("Seulement les mises en parc")
+        }
+        else if (props.type == "balades") {
+            setLabelType("Seulement les balades")
+        }
+
+        if (props.days == 0) {
+            setLabelDays("Tout l'historique");
+        }
+        else {
+            setLabelDays("Seulement les " + props.days + " derniers jours");
+        }
     }
     useEffect(() => {
         preprocess()
@@ -35,40 +59,77 @@ export default function Calendar(props) {
     }, [props]);
 
     const frenchMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+
+    function tootip_text(activity) {
+        if (activity.count == 0)
+            return `Pas de sortie le ${activity.date}`
+        if (activity.count == 1)
+            return `Mise en parc le ${activity.date}`
+        if (activity.count == 2)
+            return `Une balade le ${activity.date}`
+        if (activity.count == 3)
+            return `Mise en parc et une balade le ${activity.date}`
+        if (activity.count == 4)
+            return `Deux balades le ${activity.date}`
+        if (activity.count == 5)
+            return `Mise en parc et deux balades le ${activity.date}`
+        return `Valeur (${activity.count}) inconnue`
+    }
+
     return (
         <>
-            <div style={{ "height": "150px" }}>
-                <ResponsiveCalendar
-                    monthLegend={(_year, month) => frenchMonths[month]}
-                    data={data}
-                    from="2023-07-01"
-                    to="2023-09-01"
-                    emptyColor="#EEE"
-                    colors={['#F99', '#EEE', '#99F', '#9F9', '#9FF', '#FF9']}
-                    margin={{ top: 20, right: 120, bottom: 40, left: 25 }}
-                    yearSpacing={40}
-                    minValue="-1"
-                    maxValue="4"
-                    monthBorderColor="#333"
-                    dayBorderWidth={2}
-                    dayBorderColor="#ffffff"
-                />
-            </div>
-            <Row md={3}>
-                <Col><FontAwesomeIcon style={{ color: "#F99" }} icon={faSquare} />  Mise en parc</Col>
-                <Col><FontAwesomeIcon style={{ color: "#99F" }} icon={faSquare} />  Mise en parc + 1 balade</Col>
-                <Col><FontAwesomeIcon style={{ color: "#9FF" }} icon={faSquare} />  Mise en parc + 2 balades</Col>
-                <Col><FontAwesomeIcon style={{ color: "#9F9" }} icon={faSquare} />   1 balade</Col>
-                <Col><FontAwesomeIcon style={{ color: "#FF9" }} icon={faSquare} />   2 balades</Col>
+            <ActivityCalendar
+                theme={explicitTheme}
+                colorScheme="dark"
+                colors={["gray", "red", "blue", "purple", "purple"]}
+                data={data}
+                weekStart={1}
+                blockRadius={5}
+                blockSize={25}
+                showWeekdayLabels
+                renderBlock={(block, activity) =>
+                    React.cloneElement(block, {
+                        'data-tooltip-id': 'react-tooltip',
+                        'data-tooltip-html': tootip_text(activity),
+                    })
+                }
+                labels={{
+                    months: { frenchMonths },
+                    weekdays: [
+                        'Dimanche', // Sunday first!
+                        'Lundi',
+                        'Mardi',
+                        'Mercredi',
+                        'Jeudi',
+                        'Vendredi',
+                        'Samedi',
+                    ],
+                    totalCount: '{{count}} sorties',
+                    legend: {
+                        // less: 'Peu de sorties',
+                        // more: 'Beaucoup de sorties',
+                        less: '',
+                        more: '',
+                    },
+                }}
+            />
+            <ReactTooltip id="react-tooltip" />
+            <Row md={4}>
+                <Col>
+                    <FontAwesomeIcon style={{ 'color': '#E96479' }} icon={faSquare} /> Parc
+                </Col>
+                <Col>
+                    <FontAwesomeIcon style={{ 'color': '#7DB9B6' }} icon={faSquare} /> Balade
+                </Col>
+                <Col>
+                    <FontAwesomeIcon style={{ 'color': '#F5E9CF' }} icon={faSquare} /> Parc + Balade
+                </Col>
+                <Col>
+                    <FontAwesomeIcon style={{ 'color': '#4D455D' }} icon={faSquare} /> 2 balades
+                </Col>
             </Row>
-            {/* <b>Légende :</b>
-            <p>
-                Case <span style={{ color: "#F99" }}>rouge</span> : Mise en parc<br />
-                Case <span style={{ color: "#99F" }}>rouge</span> : Mise en parc + 1 balade<br />
-                Case <span style={{ color: "#9F9" }}>rouge</span> : 1 balade<br />
-                Case <span style={{ color: "#9FF" }}>rouge</span> : Mise en parc + 2 balades<br />
-                Case <span style={{ color: "#FF9" }}>rouge</span> : 2 balades<br />
-            </p > */}
+            {/* dark: ['#383838', '#4D455D', '#7DB9B6', '#F5E9CF', '#E96479'], */}
+
         </>
     );
 }
