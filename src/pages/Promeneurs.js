@@ -1,8 +1,6 @@
 // import Calendar from "../components/Home/Calendar";
 
 import { Card, Col, Row } from 'react-bootstrap';
-
-import ListePromeurs from '../components/Promeneurs/Liste';
 import PromeneursBarPlot from '../components/Promeneurs/PromeneursBarPlot';
 import PromeneursChords from '../components/Promeneurs/PromeneursChords';
 

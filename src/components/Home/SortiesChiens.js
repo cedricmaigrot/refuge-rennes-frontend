@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form, Carousel, Card, OverlayTrigger } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import { ResponsiveBar } from "@nivo/bar";
 import { Tooltip } from 'react-tooltip'
-
-import { useForm } from "react-hook-form";
 import DogCard from '../Fiche';
 import 'react-tooltip/dist/react-tooltip.css'
 
@@ -17,8 +15,7 @@ export default function SortiesChiens(props) {
     const [categories, setCategories] = useState([]);
     const [colors, setColors] = useState([]);
 
-
-    function get_data() {
+    useEffect(() => {
         fetch('http://185.98.137.192:5000/balades/sorties-chiens-categories/' + props.days + "/" + props.type + "/" + props.nbResults)
             .then((response) => response.json())
             .then((data) => {
@@ -27,10 +24,6 @@ export default function SortiesChiens(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }
-
-    useEffect(() => {
-        get_data();
         fetch('http://185.98.137.192:5000/balades/categories')
             .then((response) => response.json())
             .then((data) => {
@@ -40,6 +33,7 @@ export default function SortiesChiens(props) {
                 data.map(e => {
                     cat.push(e['Categorie'])
                     col.push(e['color'])
+                    return true
                 })
 
                 setCategories(cat);
@@ -48,10 +42,6 @@ export default function SortiesChiens(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
-
-    useEffect(() => {
-        get_data();
     }, [props]);
 
     return (

@@ -2,17 +2,15 @@
 
 // import Calendar from "../components/Home/Calendar";
 
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import Calendar from "../components/Home/Calendar";
 import SortiesChiens from "../components/Home/SortiesChiens";
-import SortiesChiensStream from "../components/Home/SortiesChiensStream";
 import ChiensSansBalade from '../components/Home/ChiensSansBalade';
 
 
 
 export default function Home(props) {
-
 
     return (
         <>

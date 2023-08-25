@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
-import ActivityCalendar from 'react-activity-calendar'
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { Row, Col } from 'react-bootstrap';
@@ -9,27 +7,15 @@ import SubCalendar from './SubCalendar';
 
 export default function Calendar(props) {
     const [labelDays, setLabelDays] = useState("");
-    const [labelType, setLabelType] = useState("");
 
-
-    function preprocess() {
-
-        if (props.days == 0) {
+    useEffect(() => {
+        if (props.days === 0) {
             setLabelDays("Tout l'historique");
         }
         else {
             setLabelDays("Seulement les " + props.days + " derniers jours");
         }
-    }
-    useEffect(() => {
-        preprocess()
-    }, []);
-
-    useEffect(() => {
-        preprocess()
     }, [props]);
-
-    const frenchMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
     return (
         <>

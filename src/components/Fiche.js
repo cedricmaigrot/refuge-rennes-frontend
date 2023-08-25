@@ -11,7 +11,6 @@ import { Badge } from 'react-bootstrap';
 
 function Fiche(props) {
 
-    const [icon, setIcon] = useState(faDog);
     const [imgPlaceholder, setImgPlaceholder] = useState("/chiens/placeholder_dog.jpg");
     const [url, setUrl] = useState('/fiche-chien/' + props.name);
     const [color, setColor] = useState("gray");
@@ -39,7 +38,6 @@ function Fiche(props) {
                 .catch((err) => {
                     console.log(err.message);
                 });
-            setIcon(faPersonWalking)
             setImgPlaceholder("/placeholder_human.jpg")
             setUrl('/fiche-promeneur/' + props.name)
         }
@@ -79,7 +77,6 @@ function Fiche(props) {
                 .catch((err) => {
                     console.log(err.message);
                 });
-            setIcon(faDog)
             setImgPlaceholder("/chiens/placeholder_dog.jpg")
             setUrl('/fiche-chien/' + props.name)
         }

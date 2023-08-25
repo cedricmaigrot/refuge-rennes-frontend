@@ -11,16 +11,13 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 export default function Calendar(props) {
     const [data, setData] = useState([]);
-    const [labelDays, setLabelDays] = useState("");
-    const [labelType, setLabelType] = useState("");
 
     const explicitTheme = {
         light: ['#f0f0f0', '#c4edde', '#7ac7c4', '#f73859', '#384259'],
         dark: ['#383838', '#E96479', '#7DB9B6', '#F5E9CF', '#4D455D'],
     };
 
-
-    function preprocess() {
+    useEffect(() => {
         const url = 'http://185.98.137.192:5000/balades/fiche-chien/calendar/' + props.name + '/' + props.days + '/' + props.type
         console.log(url)
         fetch(url)
@@ -32,46 +29,22 @@ export default function Calendar(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-
-        if (props.type == "all") {
-            setLabelType("Mises en parc + balades")
-        }
-        else if (props.type == "parcs") {
-            setLabelType("Seulement les mises en parc")
-        }
-        else if (props.type == "balades") {
-            setLabelType("Seulement les balades")
-        }
-
-        if (props.days == 0) {
-            setLabelDays("Tout l'historique");
-        }
-        else {
-            setLabelDays("Seulement les " + props.days + " derniers jours");
-        }
-    }
-    useEffect(() => {
-        preprocess()
-    }, []);
-
-    useEffect(() => {
-        preprocess()
     }, [props]);
 
     const frenchMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
     function tootip_text(activity) {
-        if (activity.count == 0)
+        if (activity.count === 0)
             return `Pas de sortie le ${activity.date}`
-        if (activity.count == 1)
+        if (activity.count === 1)
             return `Mise en parc le ${activity.date}`
-        if (activity.count == 2)
+        if (activity.count === 2)
             return `Une balade le ${activity.date}`
-        if (activity.count == 3)
+        if (activity.count === 3)
             return `Mise en parc et une balade le ${activity.date}`
-        if (activity.count == 4)
+        if (activity.count === 4)
             return `Deux balades le ${activity.date}`
-        if (activity.count == 5)
+        if (activity.count === 5)
             return `Mise en parc et deux balades le ${activity.date}`
         return `Valeur (${activity.count}) inconnue`
     }

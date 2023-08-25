@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
 
 import { ResponsiveChord } from '@nivo/chord'
 
@@ -10,8 +9,7 @@ export default function PromeneursChords(props) {
     const [categories, setCategories] = useState([]);
     const [colors, setColors] = useState([]);
 
-
-    function get_data() {
+    useEffect(() => {
         let url = 'http://185.98.137.192:5000/balades/promeneurs-chords/' + props.days + '/' + props.type + '/' + props.nbResults + ''
         console.log(url)
         fetch(url)
@@ -24,14 +22,6 @@ export default function PromeneursChords(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }
-
-    useEffect(() => {
-        get_data();
-    }, []);
-
-    useEffect(() => {
-        get_data();
     }, [props.days, props.type, props.nbResults]);
 
     return (
