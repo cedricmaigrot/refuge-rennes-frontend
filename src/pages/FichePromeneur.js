@@ -46,40 +46,48 @@ export default function FichePromeneur(props) {
                 </Col>
                 <Col md={8} className=" d-none d-md-block">
                     <h3>Calendrier des sorties</h3>
-                    <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                    <div style={{ 'marginLeft': "50px" }}>
+                        <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                    </div>
                 </Col>
             </Row>
             <hr />
-            <Row>
-                <Col md={8} sm={12} xs={12}>
-                    <h3>Chiens sortis</h3>
-                    <Row md={4} sm={2} xs={1}>
+
+            <Card
+            // bg="dark"
+            // text='light'
+            >
+                <Card.Body>
+                    <Row md={2}>
                         {
-                            dogs.map(e => {
+                            [7, 30].map(nb => {
                                 return (
-                                    <Col key={e} className="mb-4">
-                                        {/* <Fiche dog link name={e['id']} color={e['color']} notes={e['value'] + " balades"} /> */}
-                                        <Fiche dog link name={e['id']} color={e['color']} />
+                                    <Col>
+                                        <h3>{nb} jours</h3>
+                                        <div style={{ "height": "400px" }}>
+                                            <ProportionPie name={id} days={nb} type={props.type} nbResults={props.nbResults} />
+                                        </div>
                                     </Col>
                                 )
                             })
                         }
 
                     </Row>
-                </Col>
-                <Col md={4}>
-                    <h3>Mises en parc/Balades</h3>
-                    <Card
-                    // bg="dark"
-                    // text='light'
-                    >
-                        <Card.Body>
-                            <div style={{ "height": "400px" }}>
-                                <ProportionPie name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
-                            </div>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                </Card.Body>
+            </Card>
+            <h3>Chiens sortis</h3>
+            <Row md={6} sm={2} xs={1}>
+                {
+                    dogs.map(e => {
+                        return (
+                            <Col key={e} className="mb-4">
+                                {/* <Fiche dog link name={e['id']} color={e['color']} notes={e['value'] + " balades"} /> */}
+                                <Fiche dog link name={e['label']} color={e['color']} />
+                            </Col>
+                        )
+                    })
+                }
+
             </Row>
         </>
     );

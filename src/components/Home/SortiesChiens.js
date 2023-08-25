@@ -96,9 +96,15 @@ export default function SortiesChiens(props) {
                         },
                         {
                             match: {
-                                id: "Mise en parc"
+                                id: "Parc"
                             },
                             id: 'grayLines'
+                        },
+                        {
+                            match: {
+                                id: "Salarié"
+                            },
+                            id: 'blackLines'
                         }
                     ]}
                     borderColor={{
