@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
 
 
 import { ResponsiveBar } from "@nivo/bar";
@@ -10,8 +9,7 @@ export default function PromeneursBarPlot(props) {
     const [categories, setCategories] = useState([]);
     const [colors, setColors] = useState([]);
 
-
-    function get_data() {
+    useEffect(() => {
         console.log('http://185.98.137.192:5000/balades/promeneurs/' + props.days + "/" + props.type + "/" + props.nbResults);
 
         fetch('http://185.98.137.192:5000/balades/promeneurs/' + props.days + "/" + props.type + "/" + props.nbResults)
@@ -21,9 +19,9 @@ export default function PromeneursBarPlot(props) {
                 let col = []
                 setData(data_received);
                 data_received.map(e => {
-
                     cat.push(e['Personne'])
                     col.push(e['color'])
+                    return true
                 })
                 setCategories(cat);
                 setColors(col);
@@ -31,10 +29,6 @@ export default function PromeneursBarPlot(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }
-
-    useEffect(() => {
-        get_data();
     }, [props.days, props.type, props.nbResults]);
 
     return (

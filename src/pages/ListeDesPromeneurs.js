@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Form, Card } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import Fiche from '../components/Fiche';
 
 export default function ListeDesPromeneurs(props) {

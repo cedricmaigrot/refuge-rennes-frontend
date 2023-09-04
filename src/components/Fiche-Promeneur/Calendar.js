@@ -29,17 +29,17 @@ export default function Calendar(props) {
                 console.log(err.message);
             });
 
-        if (props.type == "all") {
+        if (props.type === "all") {
             setLabelType("Mises en parc + balades")
         }
-        else if (props.type == "parcs") {
+        else if (props.type === "parcs") {
             setLabelType("Seulement les mises en parc")
         }
-        else if (props.type == "balades") {
+        else if (props.type === "balades") {
             setLabelType("Seulement les balades")
         }
 
-        if (props.days == 0) {
+        if (props.days === 0) {
             setLabelDays("Tout l'historique");
         }
         else {

@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCircleHalfStroke, faPersonWalking, faDog } from '@fortawesome/free-solid-svg-icons'
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons/faCircle'
 import { Badge } from 'react-bootstrap';
+import './Fiche.css';
 
 
 function Fiche(props) {
 
-    const [icon, setIcon] = useState(faDog);
     const [imgPlaceholder, setImgPlaceholder] = useState("/chiens/placeholder_dog.jpg");
     const [url, setUrl] = useState('/fiche-chien/' + props.name);
     const [color, setColor] = useState("gray");
@@ -39,7 +39,6 @@ function Fiche(props) {
                 .catch((err) => {
                     console.log(err.message);
                 });
-            setIcon(faPersonWalking)
             setImgPlaceholder("/placeholder_human.jpg")
             setUrl('/fiche-promeneur/' + props.name)
         }
@@ -79,7 +78,6 @@ function Fiche(props) {
                 .catch((err) => {
                     console.log(err.message);
                 });
-            setIcon(faDog)
             setImgPlaceholder("/chiens/placeholder_dog.jpg")
             setUrl('/fiche-chien/' + props.name)
         }
@@ -105,11 +103,14 @@ function Fiche(props) {
                 {props.dog && <FontAwesomeIcon style={{ color: color }} icon={faDog} />}{' '}
                 {props.name}
                 {' '}
+                {
+                    props.walkCount && (
+                        <Badge>{props.walkCount} balades</Badge>
+                    )
+                }
+
 
                 {props.notes}
-                {
-                    props.link && props.notes && <br />
-                }
 
             </Card.Body>
             <Card.Footer>

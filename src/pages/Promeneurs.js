@@ -1,8 +1,6 @@
 // import Calendar from "../components/Home/Calendar";
 
 import { Card, Col, Row } from 'react-bootstrap';
-
-import ListePromeurs from '../components/Promeneurs/Liste';
 import PromeneursBarPlot from '../components/Promeneurs/PromeneursBarPlot';
 import PromeneursChords from '../components/Promeneurs/PromeneursChords';
 
@@ -22,7 +20,7 @@ export default function Promeneurs(props) {
                             <h2>Nombre de balades par promeneur</h2>
                         </Card.Header>
                         <Card.Body>
-                            <PromeneursBarPlot days={props.days} type={"balades"} nbResults={props.nbResults} />
+                            <PromeneursBarPlot days={0} type={"balades"} nbResults={10} />
                         </Card.Body>
                     </Card>
                 </Col>
@@ -37,7 +35,7 @@ export default function Promeneurs(props) {
                             <h2>Correspondances entre les promeneurs</h2>
                         </Card.Header>
                         <Card.Body>
-                            <PromeneursChords days={props.days} type={"balades"} nbResults={props.nbResults} />
+                            <PromeneursChords days={0} type={"balades"} nbResults={10} />
                         </Card.Body>
                     </Card>
                 </Col>

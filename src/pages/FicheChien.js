@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 
-import { Row, Col, Form, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import Fiche from "../components/Fiche";
 import Calendar from "../components/Fiche-Chien/Calendar";
 import ProportionPie from "../components/Fiche-Chien/ProportionPie";
@@ -29,7 +29,7 @@ export default function FicheChien(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
+    }, [id]);
 
     return (
         <>
@@ -62,7 +62,7 @@ export default function FicheChien(props) {
                             walkers.map(walker => {
                                 return (
                                     <Col key={walker} className="mb-4">
-                                        <Fiche human link name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
+                                        <Fiche human link name={walker['id']} color={walker['color']} walkCount={walker['value']} />
                                     </Col>
                                 )
                             })

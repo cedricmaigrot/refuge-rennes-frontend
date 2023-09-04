@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-import { Row, Col, Form, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import Fiche from "../components/Fiche";
 import Calendar from "../components/Fiche-Promeneur/Calendar";
 import ProportionPie from "../components/Fiche-Promeneur/ProportionPie";
@@ -29,7 +29,7 @@ export default function FichePromeneur(props) {
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
+    }, [id]);
 
     return (
         <>

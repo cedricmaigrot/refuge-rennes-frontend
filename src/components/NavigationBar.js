@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Form, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -14,33 +14,8 @@ import { faHome, faPersonWalking, faAddressCard, faGears } from '@fortawesome/fr
 function NavigationBar(props) {
     const cookies = new Cookies();
     const [show, setShow] = useState(false);
-    const [showNavText, setShowNavText] = useState(true);
-    const [y, setY] = useState(window.scrollY);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
-    // const handleNavigation = useCallback(
-    //     (e) => {
-    //         const window = e.currentTarget;
-    //         if (window.scrollY < 50) {
-    //             setShowNavText(true)
-    //         } else {
-    //             setShowNavText(false)
-    //         }
-    //         setY(window.scrollY);
-    //     },
-    //     [y]
-    // );
-
-    // useEffect(() => {
-    //     setY(window.scrollY);
-    //     window.addEventListener("scroll", handleNavigation);
-
-    //     return () => {
-    //         window.removeEventListener("scroll", handleNavigation);
-    //     };
-    // }, [handleNavigation]);
 
 
     return (
@@ -51,16 +26,16 @@ function NavigationBar(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/"><FontAwesomeIcon icon={faHome} /> {showNavText && "Accueil"}</Nav.Link>
-                            <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> {showNavText && "Promeneurs"}</Nav.Link>
-                            <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> {showNavText && "Fiches"}</>)} id="basic-nav-dropdown">
+                            <Nav.Link href="/"><FontAwesomeIcon icon={faHome} /> Accueil</Nav.Link>
+                            <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> Promeneurs</Nav.Link>
+                            <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> Fiches</>)} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/fiche-chien">Chien</NavDropdown.Item>
                                 <NavDropdown.Item href="/fiche-promeneur">Promeneur</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav>
                             <Nav.Link onClick={handleShow} >
-                                <FontAwesomeIcon icon={faGears} /> {showNavText && "Options"}
+                                <FontAwesomeIcon icon={faGears} />Options
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
