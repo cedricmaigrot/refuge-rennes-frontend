@@ -165,20 +165,13 @@ export default function SortiesChiens(props) {
                     barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
                 />
             </div>
-            <Row md="6">
+            {/* <Row md="6">
                 {
                     data.map((element, index) => {
 
                         return (
                             <Col className="mb-4 mt-4 d-none d-md-block" >
                                 <DogCard photo dog dogLink name={element['Chien']} />
-                                {/* <Card className='mb-4'>
-                                    <Card.Header>{element['Chien']} -{' '}
-                                        <span data-tooltip-id={"my-tooltip"} data-tooltip-delay-show={100} data-tooltip-delay-hide={500} data-tooltip-html={"<img width='200px' onError='this.onerror=null;this.src=" + '"/chiens/placeholder_dog.jpg"' + ";' src='/chiens/" + element['Chien'].toLowerCase() + ".jpg'} alt='ok'/>"}>
-                                            👁
-                                        </span>
-                                    </Card.Header>
-                                </Card> */}
                             </Col>
                         )
                         // <Col className='mb-4'><DogCard name={element['Chien']} /></Col>
@@ -186,7 +179,7 @@ export default function SortiesChiens(props) {
 
                 }
 
-            </Row>
+            </Row> */}
             <Tooltip id="my-tooltip" />
 
 
