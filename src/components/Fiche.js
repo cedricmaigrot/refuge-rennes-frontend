@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCircleHalfStroke, faPersonWalking, faDog } from '@fortawesome/free-solid-svg-icons'
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons/faCircle'
 import { Badge } from 'react-bootstrap';
+import './Fiche.css';
 
 
 function Fiche(props) {
@@ -102,11 +103,14 @@ function Fiche(props) {
                 {props.dog && <FontAwesomeIcon style={{ color: color }} icon={faDog} />}{' '}
                 {props.name}
                 {' '}
+                {
+                    props.walkCount && (
+                        <Badge>{props.walkCount} balades</Badge>
+                    )
+                }
+
 
                 {props.notes}
-                {
-                    props.link && props.notes && <br />
-                }
 
             </Card.Body>
             <Card.Footer>

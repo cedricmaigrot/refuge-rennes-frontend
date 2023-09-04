@@ -26,8 +26,8 @@ function NavigationBar(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/"><FontAwesomeIcon icon={faHome} />Accueil</Nav.Link>
-                            <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} />Promeneurs</Nav.Link>
+                            <Nav.Link href="/"><FontAwesomeIcon icon={faHome} /> Accueil</Nav.Link>
+                            <Nav.Link href="/promeneurs"><FontAwesomeIcon icon={faPersonWalking} /> Promeneurs</Nav.Link>
                             <NavDropdown title={(<><FontAwesomeIcon icon={faAddressCard} /> Fiches</>)} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/fiche-chien">Chien</NavDropdown.Item>
                                 <NavDropdown.Item href="/fiche-promeneur">Promeneur</NavDropdown.Item>

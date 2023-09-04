@@ -62,7 +62,7 @@ export default function FicheChien(props) {
                             walkers.map(walker => {
                                 return (
                                     <Col key={walker} className="mb-4">
-                                        <Fiche human link name={walker['id']} color={walker['color']} notes={walker['value'] + " balades"} />
+                                        <Fiche human link name={walker['id']} color={walker['color']} walkCount={walker['value']} />
                                     </Col>
                                 )
                             })
