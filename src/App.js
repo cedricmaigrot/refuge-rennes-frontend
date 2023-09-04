@@ -19,7 +19,7 @@ function App() {
   const cookies = new Cookies();
   if (!cookies.get('refuge_rennes_days')) { cookies.set('refuge_rennes_days', 7) }
   if (!cookies.get('refuge_rennes_type')) { cookies.set('refuge_rennes_type', "all") }
-  if (!cookies.get('refuge_rennes_nbresults')) { cookies.set('refuge_rennes_nbresults', 5) }
+  if (!cookies.get('refuge_rennes_nbresults')) { cookies.set('refuge_rennes_nbresults', 10) }
 
   const [days, setDays] = useState(cookies.get('refuge_rennes_days'));
   const [type, setType] = useState(cookies.get('refuge_rennes_type'));

@@ -47,7 +47,7 @@ export default function FichePromeneur(props) {
                 <Col md={8} className=" d-none d-md-block">
                     <h3>Calendrier des sorties</h3>
                     <div style={{ 'marginLeft': "50px" }}>
-                        <Calendar name={id} days={props.days} type={props.type} nbResults={props.nbResults} />
+                        <Calendar name={id} days={90} type={props.type} nbResults={props.nbResults} />
                     </div>
                 </Col>
             </Row>
@@ -58,9 +58,9 @@ export default function FichePromeneur(props) {
             // text='light'
             >
                 <Card.Body>
-                    <Row md={2}>
+                    <Row md={3}>
                         {
-                            [7, 30].map(nb => {
+                            [7, 14, 365].map(nb => {
                                 return (
                                     <Col>
                                         <h3>{nb} jours</h3>

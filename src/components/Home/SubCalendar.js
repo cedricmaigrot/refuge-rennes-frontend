@@ -28,7 +28,7 @@ export default function SubCalendar(props) {
 
     useEffect(() => {
         preprocess()
-    }, [preprocess, props]);
+    }, [props]);
 
     const frenchMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 

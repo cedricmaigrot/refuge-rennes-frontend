@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Card, Form } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import Calendar from "../components/Home/Calendar";
 import SortiesChiens from "../components/Home/SortiesChiens";
@@ -44,12 +45,21 @@ export default function Home(props) {
                             <option value="parcs">Seulement les mises en parc</option>
                         </Form.Select>
                     </Form>
-                    <h3>Les 7 derniers jours</h3>
-                    <SortiesChiens days={7} type={type} nbResults={props.nbResults} />
-                    <h3>Les 14 derniers jours</h3>
-                    <SortiesChiens days={14} type={type} nbResults={props.nbResults} />
-                    <h3>Depuis le 31/07/2023</h3>
-                    <SortiesChiens days={0} type={type} nbResults={props.nbResults} />
+
+                    <Row>
+                        <Col style={{ paddingLeft: "60px" }}>
+                            <h3>Les 7 derniers jours</h3>
+                            <SortiesChiens days={7} type={type} nbResults={props.nbResults} />
+                        </Col>
+                        <Col style={{ paddingLeft: "60px" }}>
+                            <h3>Les 14 derniers jours</h3>
+                            <SortiesChiens days={14} type={type} nbResults={props.nbResults} />
+                        </Col>
+                        <Col style={{ paddingLeft: "60px" }}>
+                            <h3>Depuis le 31/07/2023</h3>
+                            <SortiesChiens days={0} type={type} nbResults={props.nbResults} />
+                        </Col>
+                    </Row>
                 </Card.Body>
             </Card>
 

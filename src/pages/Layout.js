@@ -17,7 +17,7 @@ const Layout = (props) => {
                 setNbResults={props.setNbResults}
                 setShow={setShow}
             />
-            <Container id="top">
+            <Container fluid id="top">
                 <Alert show={show} variant="info" className="mt-4 mb-4" onClose={() => setShow(false)} dismissible>
                     <Alert.Heading>Options choisies :  </Alert.Heading>
                     <p>

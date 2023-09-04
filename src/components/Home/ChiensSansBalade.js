@@ -18,9 +18,9 @@ export default function ChiensSansBalade(props) {
     }, []);
 
     return (
-        <Row md={6} sm={2} xs={1}>
+        <Row>
             {data.map(e => {
-                return <Col className='mb-4'><DogCard photo dog name={e} /></Col>
+                return <Col lg={2} className='mb-4'><DogCard photo dog name={e} /></Col>
             })}
         </Row>
     );
